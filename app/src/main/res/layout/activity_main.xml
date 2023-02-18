@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+ <Toolbar
+     android:layout_width="match_parent"
+     android:layout_height="?attr/actionBarSize"
+     android:background="?attr/colorPrimary"
+     android:theme="@style/ThemeOverlay.AppCompat.Dark"
+     android:popupTheme="@string/app_name"
+     android:id="@+id/toolbar">
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="@string/app_name"
+         android:textSize="24dp"
+         android:layout_gravity="center"
+         android:gravity="center"
+         android:textColor="#FFFFFF"
+         />
+ </Toolbar>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Zadejte svoji zprávu"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/inputText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputText"
+        android:id="@+id/inputKey"
+        android:hint="Zadejte svůj klíč"/>
+
+    <TextView
+        android:id="@+id/outputText"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_below="@id/inputKey"
+        android:layout_marginTop="-2dp"
+        android:hint="Zašifrovaný text" />
+
+    <Button
+        android:id="@+id/encrypt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/outputText"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="Zašifrovat"
+        android:onClick="encrypt"/>
+
+
+    <Button
+        android:id="@+id/decrypt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/encrypt"
+        android:layout_marginTop="-1dp"
+        android:onClick="decrypt"
+        android:text="Dešifrovat"
+        app:layout_anchorGravity="bottom|center" />
+
+
+    <TextView
+        android:id="@+id/AES"
+        android:paddingLeft="5dp"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:textSize="8pt"
+        android:gravity="center"
+        android:layout_below="@id/decrypt"
+        android:layout_marginTop="-2dp"
+        android:text="AES režimy" />
+
+    <TextView
+        android:id="@+id/hash"
+        android:layout_width="221dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/decrypt"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-2dp"
+        android:gravity="center"
+        android:paddingRight="70dp"
+        android:text="Ostatní"
+        android:textSize="8pt" />
+    <RadioGroup
+        android:id="@+id/radiogroupLeft"
+        android:layout_below="@+id/AES"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+
+       <RadioButton
+           android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioECB"
+            android:text="ECB"
+            android:textSize="20sp"/>
+        <RadioButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioCBC"
+            android:text="CBC"
+            android:textSize="20sp"/>
+        <RadioButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGCM"
+            android:text="GCM"
+            android:textSize="20sp"/>
+        <RadioButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioCTR"
+            android:text="CTR"
+            android:textSize="20sp"/>
+
+    </RadioGroup>
+    <RadioGroup
+        android:id="@+id/radiogroupRight"
+        android:layout_below="@+id/hash"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        >
+
+        <RadioButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioRSA"
+            android:text="RSA"
+            android:textSize="20sp"/>
+        <RadioButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioSHA256"
+            android:text="SHA-256"
+            android:textSize="20sp"/>
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skupinové podpisy"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:onClick="openNextPage"
+        android:id="@+id/buttonSignitures"/>
+
+</RelativeLayout>

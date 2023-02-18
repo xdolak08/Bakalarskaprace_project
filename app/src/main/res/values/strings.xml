@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Kryptografická primitiva</string>
+    <string name="signatures">Skupinové podpisy</string>
+</resources>
