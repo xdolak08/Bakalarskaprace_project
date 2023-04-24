@@ -22,6 +22,7 @@
          android:gravity="center"
          android:textColor="#FFFFFF"
          />
+
  </Toolbar>
 
 
@@ -152,7 +153,16 @@
         android:text="Skupinové podpisy"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:onClick="openNextPage"
-        android:id="@+id/buttonSignitures"/>
+        android:onClick="Selected"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="248dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="Selected"
+        android:text="QR" />
 
 </RelativeLayout>

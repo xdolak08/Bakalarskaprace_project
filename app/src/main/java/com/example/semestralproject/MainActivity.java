@@ -1,5 +1,6 @@
 package com.example.semestralproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -37,6 +38,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     EditText inputKey, inputText;
@@ -55,12 +57,30 @@ public class MainActivity extends AppCompatActivity {
     RadioButton radioSHA256;
 
 
-    public void openNextPage(View view){
-        Intent intent = new Intent(this, Signatures.class);
-        startActivity(intent);
+
+
+    public void Selected(View View)
+    {
+        String button_text;
+        button_text =((Button)View).getText().toString();
+        if(button_text.equals("Skupinové podpisy"))
+        {
+            Intent ganesh = new Intent(this,Signatures.class);
+            startActivity(ganesh);
+        }
+        else if (button_text.equals("QR"))
+        {
+            Intent mass = new Intent(this,QRGenerator.class);
+            startActivity(mass);
+
+        }
     }
 
 
+
+
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
+
+
         radioGroupRight.clearCheck();
         radioGroupRight.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -100,46 +128,42 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
         encrypt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     int selectedIdleft = radioGroupLeft.getCheckedRadioButtonId();
                     int selectedIdright = radioGroupRight.getCheckedRadioButtonId();
-                    if(selectedIdleft == radioCBC.getId()) {
-                        Toast.makeText(MainActivity.this,"Vybrali jste CBC", Toast.LENGTH_LONG).show();
+                    if (selectedIdleft == radioCBC.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste CBC", Toast.LENGTH_LONG).show();
                         mereni();
                         outputString = CBCencrypt(inputText.getText().toString(), inputKey.getText().toString());
                         finalText.setText(outputString);
 
                     } else if (selectedIdleft == radioECB.getId()) {
-                        Toast.makeText(MainActivity.this,"Vybrali jste ECB", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Vybrali jste ECB", Toast.LENGTH_LONG).show();
                         outputString = ECBencrypt(inputText.getText().toString(), inputKey.getText().toString());
                         finalText.setText(outputString);
-                    } else if (selectedIdleft == radioGCM.getId()){
-                        Toast.makeText(MainActivity.this,"Vybrali jste GCM", Toast.LENGTH_LONG).show();
+                    } else if (selectedIdleft == radioGCM.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste GCM", Toast.LENGTH_LONG).show();
                         outputString = GCMencrypt(inputText.getText().toString());
                         finalText.setText(outputString);
-                    }
-                    else if (selectedIdleft == radioCTR.getId()){
-                        Toast.makeText(MainActivity.this,"Vybrali jste CTR", Toast.LENGTH_LONG).show();
+                    } else if (selectedIdleft == radioCTR.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste CTR", Toast.LENGTH_LONG).show();
                         outputString = CTRencrypt(inputText.getText().toString(), inputKey.getText().toString());
                         finalText.setText(outputString);
-                    }
-                    else if (selectedIdright == radioRSA.getId()){
-                        Toast.makeText(MainActivity.this,"Vybrali jste RSA", Toast.LENGTH_LONG).show();
+                    } else if (selectedIdright == radioRSA.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste RSA", Toast.LENGTH_LONG).show();
                         outputString = RSAencrypt(inputText.getText().toString());
                         finalText.setText(outputString);
                         radioGroupRight.clearCheck();
                     } else if (selectedIdright == radioSHA256.getId()) {
-                        Toast.makeText(MainActivity.this,"Vybrali jste SHA-256", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Vybrali jste SHA-256", Toast.LENGTH_LONG).show();
                         outputString = sha256String(inputText.getText().toString());
                         finalText.setText(outputString);
                         radioGroupRight.clearCheck();
-                    } else Toast.makeText(MainActivity.this,"Nebyla vybrána šifra!", Toast.LENGTH_LONG).show();
+                    } else
+                        Toast.makeText(MainActivity.this, "Nebyla vybrána šifra!", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -152,48 +176,51 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     int selectedId = radioGroupLeft.getCheckedRadioButtonId();
-                    if(selectedId == radioECB.getId()) {
+                    if (selectedId == radioECB.getId()) {
                         Toast.makeText(MainActivity.this,
                                 "Vybrali jste dešifrování ECB",
                                 Toast.LENGTH_LONG).show();
                         outputString = ECBdecrypt(outputString, inputKey.getText().toString());
                         finalText.setText(outputString);
                         radioGroupLeft.clearCheck();
-                    } else if (selectedId == radioRSA.getId()){
-                        Toast.makeText(MainActivity.this,"Vybrali jste dešifrování RSA",
+                    } else if (selectedId == radioRSA.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste dešifrování RSA",
                                 Toast.LENGTH_LONG).show();
                         outputString = RSAdecrypt(outputString);
                         finalText.setText(outputString);
-                    }
-                    else if (selectedId == radioCBC.getId()) {
-                        Toast.makeText(MainActivity.this,"Vybrali jste dešifrování CBC",
+                    } else if (selectedId == radioCBC.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste dešifrování CBC",
                                 Toast.LENGTH_LONG).show();
                         outputString = CBCdecrypt(outputString, CBCkey, iv);
                         finalText.setText(outputString);
                         radioGroupLeft.clearCheck();
-                    }
-                    else if (selectedId == radioGCM.getId()){
-                        Toast.makeText(MainActivity.this,"Vybrali jste dešifrování GCM",
+                    } else if (selectedId == radioGCM.getId()) {
+                        Toast.makeText(MainActivity.this, "Vybrali jste dešifrování GCM",
                                 Toast.LENGTH_LONG).show();
                         outputString = GCMdecrypt(outputString);
                         finalText.setText(outputString);
                         radioGroupLeft.clearCheck();
-                    }
-                    else Toast.makeText(MainActivity.this,"Nebyla vybrána šifra!",
-                                Toast.LENGTH_LONG).show();
+                    } else Toast.makeText(MainActivity.this, "Nebyla vybrána šifra!",
+                            Toast.LENGTH_LONG).show();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
+
+
     }
+
+
+
+
 
     //AES----------------------------------------------------------------
 
     public void mereni() throws Exception {
-        for (int i = 0; i < 100; ++i)
-        {
+        for (int i = 0; i < 100; ++i) {
             CTRencrypt("Testovaci text", "hodnesilneheslo");
             Log.d("Měření", "pokus" + i);
         }
@@ -208,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
 
     IvParameterSpec iv;
     SecretKeySpec CBCkey;
+
     private String CBCencrypt(String Data, String password) throws Exception {
 
         iv = getIVSecureRandom("AES/CBC/PKCS5Padding");
@@ -222,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
     IvParameterSpec ivCTR;
     SecretKeySpec CTRkey;
+
     private String CTRencrypt(String Data, String password) throws Exception {
 
         ivCTR = getIVSecureRandom("AES/CTR/PKCS5Padding");
@@ -234,8 +263,7 @@ public class MainActivity extends AppCompatActivity {
         return encryptedValue;
     }
 
-    public static String CBCdecrypt (String cipherText, SecretKey key, IvParameterSpec IV)
-    {
+    public static String CBCdecrypt(String cipherText, SecretKey key, IvParameterSpec IV) {
         Cipher cipher = null;
         try {
             cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -267,30 +295,30 @@ public class MainActivity extends AppCompatActivity {
 
     Cipher GCMencryptionCipher = null;
     SecretKey GCMkey;
-    public String GCMencrypt(String message) throws Exception{
+
+    public String GCMencrypt(String message) throws Exception {
         KeyGenerator generator = KeyGenerator.getInstance("AES");
         generator.init(128);
         GCMkey = generator.generateKey();
         System.out.println(GCMkey.getEncoded().toString());
         byte[] messageInBytes = message.getBytes();
         GCMencryptionCipher = Cipher.getInstance("AES_128/GCM/NoPadding");
-        GCMencryptionCipher.init(Cipher.ENCRYPT_MODE,GCMkey);
+        GCMencryptionCipher.init(Cipher.ENCRYPT_MODE, GCMkey);
         byte[] encryptedBytes = GCMencryptionCipher.doFinal(messageInBytes);
         return Base64.encodeToString(encryptedBytes, Base64.DEFAULT);
     }
 
-    public String GCMdecrypt(String encryptedMessage) throws Exception{
-        byte[] messageInBytes = Base64.decode(encryptedMessage,Base64.DEFAULT);
+    public String GCMdecrypt(String encryptedMessage) throws Exception {
+        byte[] messageInBytes = Base64.decode(encryptedMessage, Base64.DEFAULT);
         Cipher decryptionCipher = Cipher.getInstance("AES_128/GCM/NoPadding");
         GCMParameterSpec spec = new GCMParameterSpec(128, GCMencryptionCipher.getIV());
-        decryptionCipher.init(Cipher.DECRYPT_MODE,GCMkey,spec);
+        decryptionCipher.init(Cipher.DECRYPT_MODE, GCMkey, spec);
         byte[] decryptedBytes = decryptionCipher.doFinal(messageInBytes);
         return decryptedBytes.toString();
     }
 
 
-
-   public String ECBdecrypt(String outputString, String password)
+    public String ECBdecrypt(String outputString, String password)
             throws Exception {
         SecretKeySpec key = generateKey(password);
         Cipher cipher = Cipher.getInstance(AES);
@@ -311,12 +339,6 @@ public class MainActivity extends AppCompatActivity {
         return secretKeySpec;
 
     }
-
-
-
-
-
-
 
 
     // RSA ----------------------------
@@ -341,13 +363,12 @@ public class MainActivity extends AppCompatActivity {
 
     private String RSAencrypt(String inputText) throws NoSuchPaddingException,
             NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException,
-            BadPaddingException
-    {
+            BadPaddingException {
         generatePair();
         Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
-        cipher.init(Cipher.ENCRYPT_MODE,publicKey);
+        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         encryptedBytes = cipher.doFinal(inputText.getBytes(StandardCharsets.UTF_8));
-        return Base64.encodeToString(encryptedBytes,Base64.DEFAULT);
+        return Base64.encodeToString(encryptedBytes, Base64.DEFAULT);
     }
 
     public String RSAdecrypt(String inputText) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
@@ -385,4 +406,7 @@ public class MainActivity extends AppCompatActivity {
 
         return hashCode;
     }
+
+
+
 }
