@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <item android:id="@+id/server"
+            android:icon="@drawable/ic_baseline_enhanced_encryption_24"
+            android:title="Server" />
+        <item android:id="@+id/addUser"
+            android:icon="@drawable/ic_baseline_supervised_user_circle_24"
+            android:title="Add user" />
+
+</menu>

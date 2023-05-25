@@ -4,34 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".CryptoPrimitives.CryptoPrimitives">
 
- <Toolbar
-     android:layout_width="match_parent"
-     android:layout_height="?attr/actionBarSize"
-     android:background="?attr/colorPrimary"
-     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-     android:popupTheme="@string/app_name"
-     android:id="@+id/toolbar">
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:text="@string/app_name"
-         android:textSize="24dp"
-         android:layout_gravity="center"
-         android:gravity="center"
-         android:textColor="#FFFFFF"
-         />
-
- </Toolbar>
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Zadejte svoji zprávu"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/inputText" />
+        android:id="@+id/inputText"
+        />
 
     <EditText
         android:layout_width="match_parent"
@@ -99,8 +81,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content">
 
-       <RadioButton
-           android:layout_width="150dp"
+        <RadioButton
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/radioECB"
             android:text="ECB"
@@ -147,22 +129,12 @@
             android:textSize="20sp"/>
     </RadioGroup>
 
-    <Button
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Skupinové podpisy"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:onClick="Selected"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="248dp"
-        android:layout_marginBottom="4dp"
-        android:onClick="Selected"
-        android:text="QR" />
-
+        android:background="@drawable/transparent_background"
+        app:menu="@menu/bottom_nav_menu_firebaseapp"/>
 </RelativeLayout>
+

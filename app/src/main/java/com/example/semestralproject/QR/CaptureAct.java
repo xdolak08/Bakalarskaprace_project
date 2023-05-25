@@ -1,4 +1,4 @@
-package com.example.semestralproject;
+package com.example.semestralproject.QR;
 
 import com.journeyapps.barcodescanner.CaptureActivity;
 

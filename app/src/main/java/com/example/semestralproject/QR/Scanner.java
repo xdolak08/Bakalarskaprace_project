@@ -1,6 +1,5 @@
-package com.example.semestralproject;
+package com.example.semestralproject.QR;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +8,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.journeyapps.barcodescanner.CaptureActivity;
+import com.example.semestralproject.firebase.Login;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 public class Scanner extends AppCompatActivity {
 
-    String klic = "ahoj";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +22,15 @@ public class Scanner extends AppCompatActivity {
     }
 
     public void QRPage(View view){
-        Intent intent = new Intent(this, QRGenerator.class);
+        Intent intent = new Intent(this, QR.class);
         startActivity(intent);
     }
 
+
+
     private void scan() {
         ScanOptions options = new ScanOptions();
-        options.setPrompt("Zvyšte hlasitost pro zapnutí baterie.");
+        options.setPrompt("Tlačítkem pro zvýšení hlasitosti zapnete baterii.");
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
         options.setCaptureActivity(CaptureAct.class);
@@ -41,10 +42,15 @@ public class Scanner extends AppCompatActivity {
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(Scanner.this);
             builder.setTitle("Výsledek scannování: " + result.getContents());
-            builder.setMessage("\nKlíč je: " + klic);
-            String vysledek = result.getContents();
-            System.out.println(vysledek);
-            if(klic.equals(vysledek))
+
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            String rowData = result.getContents();
+            intent.putExtra("Data", rowData);
+
+            startActivity(intent);
+            finish();
+
+            /*if(klic.equals(klic))
             {
                 builder.setPositiveButton("Potvrzuji, klíče jsou stejné.", new DialogInterface.OnClickListener() {
                     @Override
@@ -61,6 +67,9 @@ public class Scanner extends AppCompatActivity {
                     }
                 }).show();
             }
+
+             */
+
 
         }
     });
